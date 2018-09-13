@@ -51,7 +51,7 @@ const treeData = [{
 
 const styles = (theme) => ({
     root: {
-        width: '200px'
+        width: '400px'
     },
     nested: {
         paddingLeft: theme.spacing.unit * 4
@@ -59,11 +59,8 @@ const styles = (theme) => ({
 })
 
 class MyListItem extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            open: false
-        }
+    state = {
+        open: false
     }
 
     toggleSub = () => {
@@ -73,6 +70,7 @@ class MyListItem extends Component {
     }
 
     render() {
+        const {classes} = this.props
         const {title, children} = this.props.data
         const haveChildren = children && children.length > 0
         return <List component='div'>
@@ -87,8 +85,8 @@ class MyListItem extends Component {
             {
                 haveChildren
                     ? <Collapse in={this.state.open} timeout='auto'>
-                        <List>
-                            {children.map(child => <MyListItem data={child}/>)}
+                        <List className={classes.nested}>
+                            {children.map((child, index) => <MyListItem data={child} classes={classes} key={index}/>)}
                         </List>
                     </Collapse>
                     : ''
@@ -97,21 +95,19 @@ class MyListItem extends Component {
     }
 }
 
-class Hello extends Component {
-    constructor(props) {
-        super(props)
-    }
+class MyList extends Component {
 
     render() {
-        return <div>
+        const {classes} = this.props
+        return <div className={classes.root}>
             <List>
                 {
-                    treeData.map(node => <MyListItem data={node}/>)
+                    treeData.map((node, index) => <MyListItem data={node} classes={classes} key={index}/>)
                 }
             </List>
         </div>
     }
 }
 
-export default Hello
-// export default withStyles(styles)(Hello)
+// export default Hello
+export default withStyles(styles)(MyList)

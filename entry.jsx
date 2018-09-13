@@ -1,4 +1,4 @@
-import Hello from './hello.jsx'
+import Hello from './my-list.jsx'
 import React from 'react'
 import ReactDOM from 'react-dom'
 

@@ -1,11 +1,11 @@
-JavaScript React Base Demo (Latest)
-===================================
-
-Always update with latest versions and technologies.
+JavaScript React Material UI Nested List Demo
+=============================================
 
 ```
 npm install
 npm run dev
 ```
 
-Then visit <http://localhost:8080/>.
+It will open the index page automatically.
+
+![demo](./images/demo.jpg)
