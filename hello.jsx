@@ -59,8 +59,11 @@ const styles = (theme) => ({
 })
 
 class MyListItem extends Component {
-    state = {
-        open: false
+    constructor(props) {
+        super(props)
+        this.state = {
+            open: false
+        }
     }
 
     toggleSub = () => {
@@ -70,10 +73,8 @@ class MyListItem extends Component {
     }
 
     render() {
-        const {classes} = this.props
-        const {title, children} = this.props
+        const {title, children} = this.props.data
         const haveChildren = children && children.length > 0
-
         return <List component='div'>
             <ListItem onClick={this.toggleSub} button key={title}>
                 <ListItemText primary={title}/>
@@ -86,8 +87,8 @@ class MyListItem extends Component {
             {
                 haveChildren
                     ? <Collapse in={this.state.open} timeout='auto'>
-                        <List className={classes.nested}>
-                            {this.children.map(child => <MyListItem data={child} classes={classes}/>)}
+                        <List>
+                            {children.map(child => <MyListItem data={child}/>)}
                         </List>
                     </Collapse>
                     : ''
@@ -97,17 +98,20 @@ class MyListItem extends Component {
 }
 
 class Hello extends Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
-        const {classes} = this.props
-        return <div className={classes.root}>
+        return <div>
             <List>
                 {
-                    treeData.map(node => <MyListItem data={node} classes={classes}/>)
+                    treeData.map(node => <MyListItem data={node}/>)
                 }
             </List>
         </div>
     }
 }
 
-export default withStyles(styles)(Hello)
+export default Hello
 // export default withStyles(styles)(Hello)
